@@ -6,139 +6,170 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Portfolio Builder</title>
 </head>
 
 <body>
 
     <main class="container pb-5"><br>
-        <!-- Same hero as our static Portfolio -->
+        <!-- Hero Header -->
         <header class="hero rounded-4 p-4 p-md-5 mb-4">
-            <h1 class="display-6 fw-bold mt-2">Let Create your Portfolio.</h1>
+            <h1 class="display-6 fw-bold mt-2">Let's Create Your Portfolio.</h1>
             <p class="mb-0">Capture what you enjoy, what you've tried, and what you learned.</p>
         </header>
+
+        <!-- ==================== PROFILE 1 ==================== -->
         <div>
             <div class="row g-4">
-                <!-- LEFT: The existing portfolio, initially hard-coded in HTML -->
-                <section class="col-lg-6">
+                <!-- LEFT: Section 1 (แสดงผล Portfolio มี card-body 3 ใบ) -->
+                <section class="col-lg-6" id="section1">
                     <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
-                        <span class="badge text-bg-light align-self-start mb-3">Portfolio</span>
-                        <div class="card-body rounded shadow ">
-                            <h2 class="fw-bold" id="portfolio-name1">Alex Morgan</h2>
-                            <p><strong>What I enjoy:</strong> <span id="portfolio-enjoy1">I enjoy designing websites,
-                                    exploring technology, and creating things that help people.</span></p>
-                            <p><strong>What I've tried:</strong> <span id="portfolio-tried1">I have tried HTML, CSS,
-                                    JavaScript and designing simple web applications.</span></p>
-                            <p><strong>What I'm curious about:</strong> <span id="portfolio-curious1">I am curious about
-                                    UI/UX design, artificial intelligence and interactive web development.</span></p>
-                        </div> <br>
+                        <span class="badge text-bg-light align-self-start mb-3">Portfolio 1</span>
 
-                        <!--PORT-ZONE 1-->
-                        <!--พอร์ตที่1 ไอเทมที่1-->
-                        <div class="card-body rounded shadow ">
-                            <h4><strong>My Portfolio 1</strong></h4>
+                        <!-- Card-body ใบที่ 1: เก็บข้อมูลผู้ใช้ -->
+                        <div class="card-body rounded shadow mb-4" id="card-user-1">
+                            <h4 class="fw-bold mb-3">User Profile</h4>
+                            <p><strong>Display Name:</strong> <span class="fs-5 fw-bold" id="portfolio-name1">Alex Morgan</span></p>
+                            <p><strong>What I enjoy:</strong> <span id="portfolio-enjoy1">I enjoy designing websites, exploring technology, and creating things that help people.</span></p>
+                            <p><strong>What I've tried:</strong> <span id="portfolio-tried1">I have tried HTML, CSS, JavaScript and designing simple web applications.</span></p>
+                            <p class="mb-0"><strong>What I'm curious about:</strong> <span id="portfolio-curious1">I am curious about UI/UX design, artificial intelligence and interactive web development.</span></p>
+                        </div>
+
+                        <!-- Card-body ใบที่ 2: เก็บข้อมูล Portfolio-Item 1 -->
+                        <div class="card-body rounded shadow mb-4" id="card-item1-1">
+                            <h4 class="fw-bold mb-3">Portfolio-Item 1</h4>
                             <p><strong>Title:</strong> <span id="portfolio-title1-1">Personal Website</span></p>
                             <p><strong>Type:</strong> <span id="portfolio-type1-1">Web Development</span></p>
-                            <p><strong>Date:</strong> <span id="portfolio-date1-1">04/01/2025</span></p>
+                            <p><strong>Date:</strong> <span id="portfolio-date1-1">2025-01-04</span></p>
                             <p><strong>Role:</strong> <span id="portfolio-role1-1">Developer</span></p>
-                            <p><strong>Description:</strong> <span id="portfolio-desc1-1">Created a personal website
-                                    using HTML and CSS.</span></p>
-                            <p><strong>Skills:</strong> <span id="portfolio-skill1-1">HTML,CSS,Design</span></p>
-                            <h5><strong>Reflection</strong></h5>
-                            <p><strong>What I did:</strong> <span id="portfolio-wid1-1">Designed and developed a
-                                    website.</span></p>
-                            <p><strong>What I learned:</strong> <span id="portfolio-wil1-1">Learned website structure
-                                    and styling.</span></p>
-                            <p><strong>Challenges:</strong> <span id="portfolio-chin1-1">Making the website
-                                    responsive</span></p>
-                            <p><strong>Next step:</strong> <span id="portfolio-nexts1-1">Learn more JavaScript</span>
-                            </p>
-                            <h5><strong>Evidence</strong></h5>
-                            <p><span id="portfolio-evid1-1">https://www.youtube.com/</span></p>
-                        </div> <br>
-                        <!--จบ พอร์ตที่1 ไอเทมที่1-->
+                            <p><strong>Description:</strong> <span id="portfolio-desc1-1">Created a personal website using HTML and CSS.</span></p>
+                            <p><strong>Skills:</strong> <span id="portfolio-skill1-1">HTML, CSS, Design</span></p>
+                            
+                            <h5 class="fw-bold mt-3">Reflection</h5>
+                            <p><strong>What I did:</strong> <span id="portfolio-wid1-1">Designed and developed a website.</span></p>
+                            <p><strong>What I learned:</strong> <span id="portfolio-wil1-1">Learned website structure and styling.</span></p>
+                            <p><strong>Challenges:</strong> <span id="portfolio-chin1-1">Making the website responsive.</span></p>
+                            <p><strong>Next step:</strong> <span id="portfolio-nexts1-1">Learn more JavaScript.</span></p>
+                            
+                            <h5 class="fw-bold mt-3">Evidence</h5>
+                            <p class="mb-0"><strong>Link / Info:</strong> <span id="portfolio-evid1-1">https://www.youtube.com/</span></p>
+                        </div>
 
-                        <!--พอร์ตที่1 ไอเทมที่2-->
-                        <div class="card-body rounded shadow ">
-                            <h4><strong>My Portfolio 2</strong></h4>
+                        <!-- Card-body ใบที่ 3: เก็บข้อมูล Portfolio-Item 2 -->
+                        <div class="card-body rounded shadow" id="card-item1-2">
+                            <h4 class="fw-bold mb-3">Portfolio-Item 2</h4>
                             <p><strong>Title:</strong> <span id="portfolio-title1-2">Creative Design</span></p>
                             <p><strong>Type:</strong> <span id="portfolio-type1-2">Graphic Design</span></p>
-                            <p><strong>Date:</strong> <span id="portfolio-date1-2">13/04/2025</span></p>
+                            <p><strong>Date:</strong> <span id="portfolio-date1-2">2025-04-13</span></p>
                             <p><strong>Role:</strong> <span id="portfolio-role1-2">Designer</span></p>
-                            <p><strong>Description:</strong> <span id="portfolio-desc1-2">Designed a creative poster for
-                                    a personal project</span></p>
-                            <p><strong>Skills:</strong> <span id="portfolio-skill1-2">Creativity,Design,Planning</span>
-                            </p>
-                            <h5><strong>Reflection</strong></h5>
-                            <p><strong>What I did:</strong> <span id="portfolio-wid1-2">Created a poster design.</span>
-                            </p>
-                            <p><strong>What I learned:</strong> <span id="portfolio-wil1-2">Learned about visual
-                                    communication.</span></p>
-                            <p><strong>Challenges:</strong> <span id="portfolio-chin1-2">Choosing the right visual
-                                    elements.</span></p>
-                            <p><strong>Next step:</strong> <span id="portfolio-nexts1-2">Improve my design
-                                    skills.</span></p>
-                            <h5><strong>Evidence</strong></h5>
-                            <p><span id="portfolio-evid1-2">https://www.design.com/</span></p>
+                            <p><strong>Description:</strong> <span id="portfolio-desc1-2">Designed a creative poster for a personal project.</span></p>
+                            <p><strong>Skills:</strong> <span id="portfolio-skill1-2">Creativity, Design, Planning</span></p>
+                            
+                            <h5 class="fw-bold mt-3">Reflection</h5>
+                            <p><strong>What I did:</strong> <span id="portfolio-wid1-2">Created a poster design.</span></p>
+                            <p><strong>What I learned:</strong> <span id="portfolio-wil1-2">Learned about visual communication.</span></p>
+                            <p><strong>Challenges:</strong> <span id="portfolio-chin1-2">Choosing the right visual elements.</span></p>
+                            <p><strong>Next step:</strong> <span id="portfolio-nexts1-2">Improve my design skills.</span></p>
+                            
+                            <h5 class="fw-bold mt-3">Evidence</h5>
+                            <p class="mb-0"><strong>Link / Info:</strong> <span id="portfolio-evid1-2">https://www.design.com/</span></p>
                         </div>
-                        <!--จบ พอร์ตที่1 ไอเทมที่2-->
 
-                        <p class="small text-muted mb-0 mt-3">Your portfolio updates in this browser. Saved portfolios
-                            return after refresh.</p>
+                        <p class="small text-muted mb-0 mt-3">Your portfolio updates in this browser. Saved portfolios return after refresh.</p>
                     </div>
                 </section>
 
-                <!-- RIGHT: One form only -->
-                <section class="col-lg-6">
+                <!-- RIGHT: Form สำหรับกรอกข้อมูล Profile 1 (ใส่ Label + ตัวอย่างให้ครบทุกข้อ) -->
+                <section class="col-lg-6" id="form-section1">
                     <div class="form-panel rounded-4 p-4">
                         <h2 class="h4 fw-bold mb-1">Create a portfolio</h2>
                         <p class="form-hint mb-3">Save your Portfolio and restore it after refresh.</p>
-                        <div id="profile-error" class="text-danger mb-2 fw-bold"></div>
+                        <div id="profile-error" class="form-error mb-2 fw-bold"></div>
 
                         <form id="profile-form">
-                            <!-- ข้อมูลผู้ใช้ -->
-                            <label class="form-label" for="displayName1">Display name *</label>
-                            <input class="form-control mb-3" id="displayName1" required maxlength="80"
-                                placeholder="e.g. Alex Morgan">
+                            <!-- 1. ข้อมูลผู้ใช้ -->
+                            <h5 class="fw-bold mb-2 text-warning">User Info</h5>
+                            <label class="form-label" for="displayName1">Display Name *</label>
+                            <input class="form-control mb-2" id="displayName1" required maxlength="80" placeholder="e.g. Alex Morgan">
 
                             <label class="form-label" for="enjoy1">What I enjoy</label>
-                            <input class="form-control mb-3" id="enjoy1" placeholder="e.g. Designing websites">
+                            <input class="form-control mb-2" id="enjoy1" placeholder="e.g. I enjoy designing websites and exploring technology">
 
                             <label class="form-label" for="tried1">What I've tried</label>
-                            <input class="form-control mb-3" id="tried1" placeholder="e.g. My first group project">
+                            <input class="form-control mb-2" id="tried1" placeholder="e.g. I have tried HTML, CSS, and JavaScript">
 
                             <label class="form-label" for="curious1">What I'm curious about</label>
-                            <input class="form-control mb-3" id="curious1" placeholder="e.g. Cloud computing">
+                            <input class="form-control mb-3" id="curious1" placeholder="e.g. UI/UX design and artificial intelligence">
 
-                            <!-- กรอกข้อมูล พอร์ตที่ 1 -->
-                            <h5 class="fw-bold mb-2 mt-4 text-warning">Portfolio 1</h5>
-                            <input class="form-control mb-2" id="title1-1" placeholder="Title" required>
-                            <input class="form-control mb-2" id="type1-1" placeholder="Type" required>
-                            <label class="form-label mb-1" for="date1-1">Date</label>
+                            <!-- 2. กรอกข้อมูล Portfolio-Item 1 -->
+                            <h5 class="fw-bold mb-2 mt-4 text-warning">Portfolio-Item 1</h5>
+                            <label class="form-label" for="title1-1">Title *</label>
+                            <input class="form-control mb-2" id="title1-1" placeholder="e.g. Personal Website" required>
+
+                            <label class="form-label" for="type1-1">Type *</label>
+                            <input class="form-control mb-2" id="type1-1" placeholder="e.g. Web Development" required>
+
+                            <label class="form-label" for="date1-1">Date *</label>
                             <input class="form-control mb-2" id="date1-1" type="date" required>
-                            <input class="form-control mb-2" id="role1-1" placeholder="Role">
-                            <input class="form-control mb-2" id="desc1-1" placeholder="Description">
-                            <input class="form-control mb-2" id="skill1-1" placeholder="Skills (e.g. HTML,CSS)">
-                            <input class="form-control mb-2" id="wid1-1" placeholder="What I did">
-                            <input class="form-control mb-2" id="wil1-1" placeholder="What I learned">
-                            <input class="form-control mb-2" id="chin1-1" placeholder="Challenges">
-                            <input class="form-control mb-2" id="nexts1-1" placeholder="Next step">
-                            <input class="form-control mb-3" id="evid1-1" placeholder="Evidence URL">
 
-                            <!-- กรอกข้อมูล พอร์ตที่ 2 -->
-                            <h5 class="fw-bold mb-2 mt-4 text-warning">Portfolio 2</h5>
-                            <input class="form-control mb-2" id="title1-2" placeholder="Title">
-                            <input class="form-control mb-2" id="type1-2" placeholder="Type">
-                            <label class="form-label mb-1" for="date1-2">Date</label>
+                            <label class="form-label" for="role1-1">Role</label>
+                            <input class="form-control mb-2" id="role1-1" placeholder="e.g. Developer">
+
+                            <label class="form-label" for="desc1-1">Description</label>
+                            <input class="form-control mb-2" id="desc1-1" placeholder="e.g. Created a personal website using HTML and CSS">
+
+                            <label class="form-label" for="skill1-1">Skills</label>
+                            <input class="form-control mb-2" id="skill1-1" placeholder="e.g. HTML, CSS, Design">
+
+                            <label class="form-label" for="wid1-1">Reflection - What I did</label>
+                            <input class="form-control mb-2" id="wid1-1" placeholder="e.g. Designed and developed a website">
+
+                            <label class="form-label" for="wil1-1">Reflection - What I learned</label>
+                            <input class="form-control mb-2" id="wil1-1" placeholder="e.g. Learned website structure and styling">
+
+                            <label class="form-label" for="chin1-1">Reflection - Challenges</label>
+                            <input class="form-control mb-2" id="chin1-1" placeholder="e.g. Making the website responsive">
+
+                            <label class="form-label" for="nexts1-1">Reflection - Next step</label>
+                            <input class="form-control mb-2" id="nexts1-1" placeholder="e.g. Learn more JavaScript">
+
+                            <label class="form-label" for="evid1-1">Evidence</label>
+                            <input class="form-control mb-3" id="evid1-1" placeholder="e.g. https://www.youtube.com/">
+
+                            <!-- 3. กรอกข้อมูล Portfolio-Item 2 -->
+                            <h5 class="fw-bold mb-2 mt-4 text-warning">Portfolio-Item 2</h5>
+                            <label class="form-label" for="title1-2">Title</label>
+                            <input class="form-control mb-2" id="title1-2" placeholder="e.g. Creative Design">
+
+                            <label class="form-label" for="type1-2">Type</label>
+                            <input class="form-control mb-2" id="type1-2" placeholder="e.g. Graphic Design">
+
+                            <label class="form-label" for="date1-2">Date</label>
                             <input class="form-control mb-2" id="date1-2" type="date">
-                            <input class="form-control mb-2" id="role1-2" placeholder="Role">
-                            <input class="form-control mb-2" id="desc1-2" placeholder="Description">
-                            <input class="form-control mb-2" id="skill1-2" placeholder="Skills">
-                            <input class="form-control mb-2" id="wid1-2" placeholder="What I did">
-                            <input class="form-control mb-2" id="wil1-2" placeholder="What I learned">
-                            <input class="form-control mb-2" id="chin1-2" placeholder="Challenges">
-                            <input class="form-control mb-2" id="nexts1-2" placeholder="Next step">
-                            <input class="form-control mb-3" id="evid1-2" placeholder="Evidence URL">
+
+                            <label class="form-label" for="role1-2">Role</label>
+                            <input class="form-control mb-2" id="role1-2" placeholder="e.g. Designer">
+
+                            <label class="form-label" for="desc1-2">Description</label>
+                            <input class="form-control mb-2" id="desc1-2" placeholder="e.g. Designed a creative poster for a personal project">
+
+                            <label class="form-label" for="skill1-2">Skills</label>
+                            <input class="form-control mb-2" id="skill1-2" placeholder="e.g. Creativity, Design, Planning">
+
+                            <label class="form-label" for="wid1-2">Reflection - What I did</label>
+                            <input class="form-control mb-2" id="wid1-2" placeholder="e.g. Created a poster design">
+
+                            <label class="form-label" for="wil1-2">Reflection - What I learned</label>
+                            <input class="form-control mb-2" id="wil1-2" placeholder="e.g. Learned about visual communication">
+
+                            <label class="form-label" for="chin1-2">Reflection - Challenges</label>
+                            <input class="form-control mb-2" id="chin1-2" placeholder="e.g. Choosing the right visual elements">
+
+                            <label class="form-label" for="nexts1-2">Reflection - Next step</label>
+                            <input class="form-control mb-2" id="nexts1-2" placeholder="e.g. Improve my design skills">
+
+                            <label class="form-label" for="evid1-2">Evidence</label>
+                            <input class="form-control mb-3" id="evid1-2" placeholder="e.g. https://www.design.com/">
 
                             <button type="submit" class="btn btn-success w-100 mt-3">Create portfolio</button>
                         </form>
@@ -146,139 +177,168 @@
                 </section>
             </div>
         </div>
-        <hr style="border: 1.5px solid rgb(39, 8, 8);">
-        <!--============== DO PORT FOLIO PROFILE 2 ===============-->
+
+        <hr class="my-5" style="border: 1.5px solid rgb(39, 8, 8);">
+
+        <!-- ==================== PROFILE 2 ==================== -->
         <div class="row g-4">
-        <!-- LEFT: The existing portfolio, initially hard-coded in HTML -->
-        <section class="col-lg-6">
-            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
-                <span class="badge text-bg-light align-self-start mb-3">Portfolio</span>
-                <div class="card-body rounded shadow ">
-                    <h2 class="fw-bold" id="portfolio-name2">Alex Morgan</h2>
-                    <p><strong>What I enjoy:</strong> <span id="portfolio-enjoy2">I enjoy designing websites,
-                            exploring technology, and creating things that help people.</span></p>
-                    <p><strong>What I've tried:</strong> <span id="portfolio-tried2">I have tried HTML, CSS,
-                            JavaScript and designing simple web applications.</span></p>
-                    <p><strong>What I'm curious about:</strong> <span id="portfolio-curious2">I am curious about
-                            UI/UX design, artificial intelligence and interactive web development.</span></p>
-                </div> <br>
+            <!-- LEFT: Section 2 -->
+            <section class="col-lg-6" id="section2">
+                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                    <span class="badge text-bg-light align-self-start mb-3">Portfolio 2</span>
+                    
+                    <!-- Card-body ใบที่ 1: ข้อมูลผู้ใช้ -->
+                    <div class="card-body rounded shadow mb-4" id="card-user-2">
+                        <h4 class="fw-bold mb-3">User Profile</h4>
+                        <p><strong>Display Name:</strong> <span class="fs-5 fw-bold" id="portfolio-name2">Alex Morgan</span></p>
+                        <p><strong>What I enjoy:</strong> <span id="portfolio-enjoy2">I enjoy designing websites, exploring technology, and creating things that help people.</span></p>
+                        <p><strong>What I've tried:</strong> <span id="portfolio-tried2">I have tried HTML, CSS, JavaScript and designing simple web applications.</span></p>
+                        <p class="mb-0"><strong>What I'm curious about:</strong> <span id="portfolio-curious2">I am curious about UI/UX design, artificial intelligence and interactive web development.</span></p>
+                    </div>
 
-                <!--PORT-ZONE 1-->
-                <!--พอร์ตที่2 ไอเทมที่1-->
-                <div class="card-body rounded shadow ">
-                    <h4><strong>My Portfolio 1</strong></h4>
-                    <p><strong>Title:</strong> <span id="portfolio-title2-1">Personal Website</span></p>
-                    <p><strong>Type:</strong> <span id="portfolio-type2-1">Web Development</span></p>
-                    <p><strong>Date:</strong> <span id="portfolio-date2-1">04/01/2025</span></p>
-                    <p><strong>Role:</strong> <span id="portfolio-role2-1">Developer</span></p>
-                    <p><strong>Description:</strong> <span id="portfolio-desc2-1">Created a personal website
-                            using HTML and CSS.</span></p>
-                    <p><strong>Skills:</strong> <span id="portfolio-skill2-1">HTML,CSS,Design</span></p>
-                    <h5><strong>Reflection</strong></h5>
-                    <p><strong>What I did:</strong> <span id="portfolio-wid2-1">Designed and developed a
-                            website.</span></p>
-                    <p><strong>What I learned:</strong> <span id="portfolio-wil2-1">Learned website structure
-                            and styling.</span></p>
-                    <p><strong>Challenges:</strong> <span id="portfolio-chin2-1">Making the website
-                            responsive</span></p>
-                    <p><strong>Next step:</strong> <span id="portfolio-nexts2-1">Learn more JavaScript</span>
-                    </p>
-                    <h5><strong>Evidence</strong></h5>
-                    <p><span id="portfolio-evid2-1">https://www.youtube.com/</span></p>
-                </div> <br>
-                <!--จบ พอร์ตที่2 ไอเทมที่1-->
+                    <!-- Card-body ใบที่ 2: Portfolio-Item 1 -->
+                    <div class="card-body rounded shadow mb-4" id="card-item2-1">
+                        <h4 class="fw-bold mb-3">Portfolio-Item 1</h4>
+                        <p><strong>Title:</strong> <span id="portfolio-title2-1">Personal Website</span></p>
+                        <p><strong>Type:</strong> <span id="portfolio-type2-1">Web Development</span></p>
+                        <p><strong>Date:</strong> <span id="portfolio-date2-1">2025-01-04</span></p>
+                        <p><strong>Role:</strong> <span id="portfolio-role2-1">Developer</span></p>
+                        <p><strong>Description:</strong> <span id="portfolio-desc2-1">Created a personal website using HTML and CSS.</span></p>
+                        <p><strong>Skills:</strong> <span id="portfolio-skill2-1">HTML, CSS, Design</span></p>
+                        
+                        <h5 class="fw-bold mt-3">Reflection</h5>
+                        <p><strong>What I did:</strong> <span id="portfolio-wid2-1">Designed and developed a website.</span></p>
+                        <p><strong>What I learned:</strong> <span id="portfolio-wil2-1">Learned website structure and styling.</span></p>
+                        <p><strong>Challenges:</strong> <span id="portfolio-chin2-1">Making the website responsive.</span></p>
+                        <p><strong>Next step:</strong> <span id="portfolio-nexts2-1">Learn more JavaScript.</span></p>
+                        
+                        <h5 class="fw-bold mt-3">Evidence</h5>
+                        <p class="mb-0"><strong>Link / Info:</strong> <span id="portfolio-evid2-1">https://www.youtube.com/</span></p>
+                    </div>
 
-                <!--พอร์ตที่2 ไอเทมที่2-->
-                <div class="card-body rounded shadow ">
-                    <h4><strong>My Portfolio 2</strong></h4>
-                    <p><strong>Title:</strong> <span id="portfolio-title2-2">Creative Design</span></p>
-                    <p><strong>Type:</strong> <span id="portfolio-type2-2">Graphic Design</span></p>
-                    <p><strong>Date:</strong> <span id="portfolio-date2-2">13/04/2025</span></p>
-                    <p><strong>Role:</strong> <span id="portfolio-role2-2">Designer</span></p>
-                    <p><strong>Description:</strong> <span id="portfolio-desc2-2">Designed a creative poster for
-                            a personal project</span></p>
-                    <p><strong>Skills:</strong> <span id="portfolio-skill2-2">Creativity,Design,Planning</span>
-                    </p>
-                    <h5><strong>Reflection</strong></h5>
-                    <p><strong>What I did:</strong> <span id="portfolio-wid2-2">Created a poster design.</span>
-                    </p>
-                    <p><strong>What I learned:</strong> <span id="portfolio-wil2-2">Learned about visual
-                            communication.</span></p>
-                    <p><strong>Challenges:</strong> <span id="portfolio-chin2-2">Choosing the right visual
-                            elements.</span></p>
-                    <p><strong>Next step:</strong> <span id="portfolio-nexts2-2">Improve my design
-                            skills.</span></p>
-                    <h5><strong>Evidence</strong></h5>
-                    <p><span id="portfolio-evid2-2">https://www.design.com/</span></p>
+                    <!-- Card-body ใบที่ 3: Portfolio-Item 2 -->
+                    <div class="card-body rounded shadow" id="card-item2-2">
+                        <h4 class="fw-bold mb-3">Portfolio-Item 2</h4>
+                        <p><strong>Title:</strong> <span id="portfolio-title2-2">Creative Design</span></p>
+                        <p><strong>Type:</strong> <span id="portfolio-type2-2">Graphic Design</span></p>
+                        <p><strong>Date:</strong> <span id="portfolio-date2-2">2025-04-13</span></p>
+                        <p><strong>Role:</strong> <span id="portfolio-role2-2">Designer</span></p>
+                        <p><strong>Description:</strong> <span id="portfolio-desc2-2">Designed a creative poster for a personal project.</span></p>
+                        <p><strong>Skills:</strong> <span id="portfolio-skill2-2">Creativity, Design, Planning</span></p>
+                        
+                        <h5 class="fw-bold mt-3">Reflection</h5>
+                        <p><strong>What I did:</strong> <span id="portfolio-wid2-2">Created a poster design.</span></p>
+                        <p><strong>What I learned:</strong> <span id="portfolio-wil2-2">Learned about visual communication.</span></p>
+                        <p><strong>Challenges:</strong> <span id="portfolio-chin2-2">Choosing the right visual elements.</span></p>
+                        <p><strong>Next step:</strong> <span id="portfolio-nexts2-2">Improve my design skills.</span></p>
+                        
+                        <h5 class="fw-bold mt-3">Evidence</h5>
+                        <p class="mb-0"><strong>Link / Info:</strong> <span id="portfolio-evid2-2">https://www.design.com/</span></p>
+                    </div>
+
+                    <p class="small text-muted mb-0 mt-3">Your portfolio updates in this browser. Saved portfolios return after refresh.</p>
                 </div>
-                <!--จบ พอร์ตที่2 ไอเทมที่2-->
+            </section>
 
-                <p class="small text-muted mb-0 mt-3">Your portfolio updates in this browser. Saved portfolios
-                    return after refresh.</p>
-            </div>
-        </section>
+            <!-- RIGHT: Form สำหรับกรอกข้อมูล Profile 2 -->
+            <section class="col-lg-6" id="form-section2">
+                <div class="form-panel rounded-4 p-4">
+                    <h2 class="h4 fw-bold mb-1">Create a portfolio</h2>
+                    <p class="form-hint mb-3">Save your Portfolio and restore it after refresh.</p>
+                    <div id="profile-error2" class="form-error mb-2 fw-bold"></div>
 
-        <!-- RIGHT: One form only -->
-        <section class="col-lg-6">
-            <div class="form-panel rounded-4 p-4">
-                <h2 class="h4 fw-bold mb-1">Create a portfolio</h2>
-                <p class="form-hint mb-3">Save your Portfolio and restore it after refresh.</p>
-                <div id="profile-error2" class="text-danger mb-2 fw-bold"></div>
+                    <form id="profile-form2">
+                        <!-- 1. ข้อมูลผู้ใช้ -->
+                        <h5 class="fw-bold mb-2 text-warning">User Info</h5>
+                        <label class="form-label" for="displayName2">Display Name *</label>
+                        <input class="form-control mb-2" id="displayName2" required maxlength="80" placeholder="e.g. Alex Morgan">
 
-                <form id="profile-form2">
-                    <!-- ข้อมูลผู้ใช้ -->
-                    <label class="form-label" for="displayName2">Display name *</label>
-                    <input class="form-control mb-3" id="displayName2" required maxlength="80"
-                        placeholder="e.g. Alex Morgan">
+                        <label class="form-label" for="enjoy2">What I enjoy</label>
+                        <input class="form-control mb-2" id="enjoy2" placeholder="e.g. I enjoy designing websites and exploring technology">
 
-                    <label class="form-label" for="enjoy2">What I enjoy</label>
-                    <input class="form-control mb-3" id="enjoy2" placeholder="e.g. Designing websites">
+                        <label class="form-label" for="tried2">What I've tried</label>
+                        <input class="form-control mb-2" id="tried2" placeholder="e.g. I have tried HTML, CSS, and JavaScript">
 
-                    <label class="form-label" for="tried2">What I've tried</label>
-                    <input class="form-control mb-3" id="tried2" placeholder="e.g. My first group project">
+                        <label class="form-label" for="curious2">What I'm curious about</label>
+                        <input class="form-control mb-3" id="curious2" placeholder="e.g. UI/UX design and artificial intelligence">
 
-                    <label class="form-label" for="curious2">What I'm curious about</label>
-                    <input class="form-control mb-3" id="curious2" placeholder="e.g. Cloud computing">
+                        <!-- 2. กรอกข้อมูล Portfolio-Item 1 -->
+                        <h5 class="fw-bold mb-2 mt-4 text-warning">Portfolio-Item 1</h5>
+                        <label class="form-label" for="title2-1">Title *</label>
+                        <input class="form-control mb-2" id="title2-1" placeholder="e.g. Personal Website" required>
 
-                    <!-- กรอกข้อมูล พอร์ตที่ 1 -->
-                    <h5 class="fw-bold mb-2 mt-4 text-warning">Portfolio 1</h5>
-                    <input class="form-control mb-2" id="title2-1" placeholder="Title" required>
-                    <input class="form-control mb-2" id="type2-1" placeholder="Type" required>
-                    <label class="form-label mb-1" for="date2-1">Date</label>
-                    <input class="form-control mb-2" id="date2-1" type="date" required>
-                    <input class="form-control mb-2" id="role2-1" placeholder="Role">
-                    <input class="form-control mb-2" id="desc2-1" placeholder="Description">
-                    <input class="form-control mb-2" id="skill2-1" placeholder="Skills (e.g. HTML,CSS)">
-                    <input class="form-control mb-2" id="wid2-1" placeholder="What I did">
-                    <input class="form-control mb-2" id="wil2-1" placeholder="What I learned">
-                    <input class="form-control mb-2" id="chin2-1" placeholder="Challenges">
-                    <input class="form-control mb-2" id="nexts2-1" placeholder="Next step">
-                    <input class="form-control mb-3" id="evid2-1" placeholder="Evidence URL">
+                        <label class="form-label" for="type2-1">Type *</label>
+                        <input class="form-control mb-2" id="type2-1" placeholder="e.g. Web Development" required>
 
-                    <!-- กรอกข้อมูล พอร์ตที่ 2 -->
-                    <h5 class="fw-bold mb-2 mt-4 text-warning">Portfolio 2</h5>
-                    <input class="form-control mb-2" id="title2-2" placeholder="Title">
-                    <input class="form-control mb-2" id="type2-2" placeholder="Type">
-                    <label class="form-label mb-1" for="date2-2">Date</label>
-                    <input class="form-control mb-2" id="date2-2" type="date">
-                    <input class="form-control mb-2" id="role2-2" placeholder="Role">
-                    <input class="form-control mb-2" id="desc2-2" placeholder="Description">
-                    <input class="form-control mb-2" id="skill2-2" placeholder="Skills">
-                    <input class="form-control mb-2" id="wid2-2" placeholder="What I did">
-                    <input class="form-control mb-2" id="wil2-2" placeholder="What I learned">
-                    <input class="form-control mb-2" id="chin2-2" placeholder="Challenges">
-                    <input class="form-control mb-2" id="nexts2-2" placeholder="Next step">
-                    <input class="form-control mb-3" id="evid2-2" placeholder="Evidence URL">
+                        <label class="form-label" for="date2-1">Date *</label>
+                        <input class="form-control mb-2" id="date2-1" type="date" required>
 
-                    <button type="submit" class="btn btn-success w-100 mt-3">Create portfolio</button>
-                </form>
-            </div>
-        </section>
+                        <label class="form-label" for="role2-1">Role</label>
+                        <input class="form-control mb-2" id="role2-1" placeholder="e.g. Developer">
+
+                        <label class="form-label" for="desc2-1">Description</label>
+                        <input class="form-control mb-2" id="desc2-1" placeholder="e.g. Created a personal website using HTML and CSS">
+
+                        <label class="form-label" for="skill2-1">Skills</label>
+                        <input class="form-control mb-2" id="skill2-1" placeholder="e.g. HTML, CSS, Design">
+
+                        <label class="form-label" for="wid2-1">Reflection - What I did</label>
+                        <input class="form-control mb-2" id="wid2-1" placeholder="e.g. Designed and developed a website">
+
+                        <label class="form-label" for="wil2-1">Reflection - What I learned</label>
+                        <input class="form-control mb-2" id="wil2-1" placeholder="e.g. Learned website structure and styling">
+
+                        <label class="form-label" for="chin2-1">Reflection - Challenges</label>
+                        <input class="form-control mb-2" id="chin2-1" placeholder="e.g. Making the website responsive">
+
+                        <label class="form-label" for="nexts2-1">Reflection - Next step</label>
+                        <input class="form-control mb-2" id="nexts2-1" placeholder="e.g. Learn more JavaScript">
+
+                        <label class="form-label" for="evid2-1">Evidence</label>
+                        <input class="form-control mb-3" id="evid2-1" placeholder="e.g. https://www.youtube.com/">
+
+                        <!-- 3. กรอกข้อมูล Portfolio-Item 2 -->
+                        <h5 class="fw-bold mb-2 mt-4 text-warning">Portfolio-Item 2</h5>
+                        <label class="form-label" for="title2-2">Title</label>
+                        <input class="form-control mb-2" id="title2-2" placeholder="e.g. Creative Design">
+
+                        <label class="form-label" for="type2-2">Type</label>
+                        <input class="form-control mb-2" id="type2-2" placeholder="e.g. Graphic Design">
+
+                        <label class="form-label" for="date2-2">Date</label>
+                        <input class="form-control mb-2" id="date2-2" type="date">
+
+                        <label class="form-label" for="role2-2">Role</label>
+                        <input class="form-control mb-2" id="role2-2" placeholder="e.g. Designer">
+
+                        <label class="form-label" for="desc2-2">Description</label>
+                        <input class="form-control mb-2" id="desc2-2" placeholder="e.g. Designed a creative poster for a personal project">
+
+                        <label class="form-label" for="skill2-2">Skills</label>
+                        <input class="form-control mb-2" id="skill2-2" placeholder="e.g. Creativity, Design, Planning">
+
+                        <label class="form-label" for="wid2-2">Reflection - What I did</label>
+                        <input class="form-control mb-2" id="wid2-2" placeholder="e.g. Created a poster design">
+
+                        <label class="form-label" for="wil2-2">Reflection - What I learned</label>
+                        <input class="form-control mb-2" id="wil2-2" placeholder="e.g. Learned about visual communication">
+
+                        <label class="form-label" for="chin2-2">Reflection - Challenges</label>
+                        <input class="form-control mb-2" id="chin2-2" placeholder="e.g. Choosing the right visual elements">
+
+                        <label class="form-label" for="nexts2-2">Reflection - Next step</label>
+                        <input class="form-control mb-2" id="nexts2-2" placeholder="e.g. Improve my design skills">
+
+                        <label class="form-label" for="evid2-2">Evidence</label>
+                        <input class="form-control mb-3" id="evid2-2" placeholder="e.g. https://www.design.com/">
+
+                        <button type="submit" class="btn btn-success w-100 mt-3">Create portfolio</button>
+                    </form>
+                </div>
+            </section>
         </div>
     </main>
-    <hr style="border: 1.5px solid rgb(39, 8, 8);">
 
-    <!--ส่วนท้าย-->
     <script src="script.js"></script>
 </body>
 
