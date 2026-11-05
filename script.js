@@ -290,3 +290,11 @@ if (savedPortfolio2) {
     document.querySelector("#portfolio-nexts2-2").textContent = p.NextStepB;
     document.querySelector("#portfolio-evid2-2").textContent = p.EvidenceB;
 }
+
+// แจ้งเตือนเมื่อ Display name เป็นช่องว่างล้วน
+document.querySelector("#displayName1").addEventListener("input", function () {
+    this.setCustomValidity(this.value.trim() === "" ? "Please enter your name." : "");
+});
+document.querySelector("#displayName2").addEventListener("input", function () {
+    this.setCustomValidity(this.value.trim() === "" ? "Please enter your name." : "");
+});
