@@ -10,7 +10,8 @@ body {
 .hero p { color: #536662; }
 .tracking { letter-spacing: .13em; }
 .card { background: #fff; }
-.form-panel { background: #20343a; color: #fff; }
+.form-panel { background: #2a0653; color: #fff; }
+.form-panel1 { background: #5f0a2e; color: #fff; }
 .form-panel .tracking, .form-hint { color: #c0d3d2; }
 .form-label { font-size: .9rem; font-weight: 600; }
 .form-control { border-radius: .65rem; padding: .68rem .8rem; }
