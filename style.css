@@ -3,18 +3,225 @@ body {
     color: #26323a;
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
-.hero {
-    background: #e6efeb;
-    color: #172c2a;
+
+.navbar {
+    background: rgba(255, 255, 255, .72);
+    border-bottom: 1px solid #e9edf0;
 }
-.hero p { color: #536662; }
-.tracking { letter-spacing: .13em; }
-.card { background: #fff; }
-.form-panel { background: #2a0653; color: #fff; }
-.form-panel1 { background: #5f0a2e; color: #fff; }
-.form-panel .tracking, .form-hint { color: #c0d3d2; }
-.form-label { font-size: .9rem; font-weight: 600; }
-.form-control { border-radius: .65rem; padding: .68rem .8rem; }
-.form-error { color: #ffbec3; min-height: 1.3em; }
-.btn-success { background: #177966; border-color: #177966; }
-.btn-success:hover { background: #116351; border-color: #116351; }
+
+.card {
+    background: #fff;
+}
+
+.form-panel {
+    background: #0511945e;
+    color: #fff;
+}
+
+.form-panel .form-hint,
+.form-panel .text-muted {
+    color: #d4c6e2 !important;
+}
+
+.form-label {
+    font-size: .9rem;
+    font-weight: 600;
+    margin-top: .35rem;
+}
+
+.form-control {
+    border-radius: .65rem;
+    padding: .68rem .8rem;
+}
+
+textarea.form-control {
+    min-height: 76px;
+}
+
+.form-error {
+    color: #ffbec3;
+    min-height: 1.3em;
+}
+
+.btn-success {
+    background: #2bb67e84;
+    border-color: #000806;
+}
+
+.btn-success:hover {
+    background: #2bb67e84;
+    border-color: #000806;
+}
+
+.portfolio-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    border: 1px solid #e6e9ed;
+    border-radius: .75rem;
+    padding: .8rem .9rem;
+    min-width: 0;
+}
+
+.portfolio-btn-name {
+    overflow-wrap: anywhere;
+    font-weight: 600;
+}
+
+.portfolio-btn-count {
+    color: #77818a;
+    font-size: .78rem;
+    white-space: nowrap;
+}
+
+.portfolio-btn.active {
+    color: #fff;
+    background: #0b852983;
+    border-color: #011914;
+}
+
+.portfolio-btn.active .portfolio-btn-count {
+    color: #e1f3ee;
+}
+
+.empty-state {
+    padding: 1.25rem .25rem;
+}
+
+.eyebrow {
+    color: #177966;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .15em;
+}
+
+.profile-info {
+    background: #f6f8f8;
+    border: 1px solid #e9eeee;
+    border-radius: .9rem;
+    padding: 1rem;
+    overflow-wrap: anywhere;
+}
+
+.item-card {
+    border: 1px solid #e1e7e7;
+    border-radius: .9rem;
+    background: #fff;
+    overflow: hidden;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.item-card.is-expanded {
+    border-color: #9cc9bd;
+    box-shadow: 0 5px 18px rgba(23, 121, 102, .08);
+}
+
+.item-toggle {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "title icon"
+        "meta icon";
+    gap: .35rem .75rem;
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+}
+
+.item-toggle:hover {
+    background: #fafcfb;
+}
+
+.item-title {
+    grid-area: title;
+    font-size: 1rem;
+    font-weight: 750;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.item-summary {
+    grid-area: meta;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+}
+
+.item-meta {
+    color: #66727a;
+    font-size: .78rem;
+}
+
+.item-meta + .item-meta::before {
+    content: "·";
+    margin-right: .45rem;
+    color: #a0a8ad;
+}
+
+.toggle-indicator {
+    grid-area: icon;
+    align-self: center;
+    color: #177966;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.item-details {
+    border-top: 1px solid #edf0f0;
+    padding: .35rem 1rem 1rem;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: minmax(115px,  .28fr) minmax(0, 1fr);
+    gap: .75rem;
+    padding: .7rem 0;
+    border-bottom: 1px solid #f0f2f2;
+}
+
+.detail-label {
+    color: #66727a;
+    font-size: .8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.detail-value {
+    margin: 0;
+    font-size: .9rem;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.evidence-link {
+    color: #177966;
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+}
+
+.item-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: .5rem;
+    padding-top: .9rem;
+}
+
+@media (max-width: 575.98px) {
+    .detail-row {
+        grid-template-columns: 1fr;
+        gap: .25rem;
+    }
+
+    .item-toggle {
+        padding: .85rem;
+    }
+
+    .item-details {
+        padding: .25rem .85rem .85rem;
+    }
+}

@@ -1,300 +1,414 @@
-//**************************** ส่วนของพอร์ตที่ 1 ***********************************//
-const form = document.querySelector("#profile-form");
-//=====จาวาสคริปอ่านค่า=====
-form.addEventListener("submit", function (event) {
-    event.preventDefault();
+// Power Up! Portfolio — browser-only version using Local Storage
+// No PHP, API, database, or server is required.
 
-    const name = document.querySelector("#displayName1").value.trim();
-    const error = document.querySelector("#profile-error");
-    //====เช็คว่าฟอร์มที่กรอกชื่อ ไม่ว่างเปล่า หากว่างเปล่าจะแจ้งเตือน====
-    if (name === "") {
-        error.textContent = "Please enter your name.";
-        return;
-    }
-    error.textContent = "";
+const STORAGE_KEY = "powerUpPortfolios_v1";
 
-    //========อ่านค่าอินพุต========
-    //ข้อมูลผู้ใช้
-    const enjoy1 = document.querySelector("#enjoy1").value.trim();
-    const tried1 = document.querySelector("#tried1").value.trim();
-    const curious1 = document.querySelector("#curious1").value.trim();
-    
-    //พอร์ตไอเทมที่1
-    const title1_1 = document.querySelector("#title1-1").value.trim();
-    const type1_1 = document.querySelector("#type1-1").value.trim();
-    const date1_1 = document.querySelector("#date1-1").value.trim();
-    const role1_1 = document.querySelector("#role1-1").value.trim();
-    const desc1_1 = document.querySelector("#desc1-1").value.trim();
-    const skill1_1 = document.querySelector("#skill1-1").value.trim();
-    const wid1_1 = document.querySelector("#wid1-1").value.trim();
-    const wil1_1 = document.querySelector("#wil1-1").value.trim();
-    const chln1_1 = document.querySelector("#chin1-1").value.trim();
-    const nexts1_1 = document.querySelector("#nexts1-1").value.trim();
-    const evid1_1 = document.querySelector("#evid1-1").value.trim();
-    
-    //พอร์ตไอเทมที่2
-    const title1_2 = document.querySelector("#title1-2").value.trim();
-    const type1_2 = document.querySelector("#type1-2").value.trim();
-    const date1_2 = document.querySelector("#date1-2").value.trim();
-    const role1_2 = document.querySelector("#role1-2").value.trim();
-    const desc1_2 = document.querySelector("#desc1-2").value.trim();
-    const skill1_2 = document.querySelector("#skill1-2").value.trim();
-    const wid1_2 = document.querySelector("#wid1-2").value.trim();
-    const wil1_2 = document.querySelector("#wil1-2").value.trim();
-    const chln1_2 = document.querySelector("#chin1-2").value.trim();
-    const nexts1_2 = document.querySelector("#nexts1-2").value.trim();
-    const evid1_2 = document.querySelector("#evid1-2").value.trim();
+let portfolios = loadPortfolios();
+let selectedId = portfolios[0]?.id ?? null;
+let editingPortfolioId = null;
+let editingItemId = null;
 
-    //========สร้าง JavaScript Object========
-    const portfolio = {
-        DisplayName: name,
-        WhatIEnjoy: enjoy1,
-        WhatIveTried: tried1,
-        WhatImCuriousAbout: curious1,
-        
-        TitleA: title1_1,
-        TypeA: type1_1,
-        DateA: date1_1,
-        RoleA: role1_1,
-        DescriptionA: desc1_1,
-        SkillA: skill1_1,
-        WhatIDidA: wid1_1,
-        WhatILearnA: wil1_1,
-        ChallengeA: chln1_1,
-        NextStepA: nexts1_1,
-        EvidenceA: evid1_1,
-        
-        TitleB: title1_2,
-        TypeB: type1_2,
-        DateB: date1_2,
-        RoleB: role1_2,
-        DescriptionB: desc1_2,
-        SkillB: skill1_2,
-        WhatIDidB: wid1_2,
-        WhatILearnB: wil1_2,
-        ChallengeB: chln1_2,
-        NextStepB: nexts1_2,
-        EvidenceB: evid1_2,
-    };
-    localStorage.setItem("portfolio1", JSON.stringify(portfolio));
-    //========อัปเดตผลลัพธ์หน้าเว็บ ด้วย Object========
-    // แสดงเนื้อหาข้อมูลผู้ใช้
-    document.querySelector("#portfolio-enjoy1").textContent = portfolio.WhatIEnjoy;
-    document.querySelector("#portfolio-tried1").textContent = portfolio.WhatIveTried;
-    document.querySelector("#portfolio-curious1").textContent = portfolio.WhatImCuriousAbout;
-    document.querySelector("#portfolio-name1").textContent = portfolio.DisplayName;
+const $ = (selector) => document.querySelector(selector);
 
-    // แสดงเนื้อหา พอร์ตไอเทม 1
-    document.querySelector("#portfolio-title1-1").textContent = portfolio.TitleA;
-    document.querySelector("#portfolio-type1-1").textContent = portfolio.TypeA;
-    document.querySelector("#portfolio-date1-1").textContent = portfolio.DateA;
-    document.querySelector("#portfolio-role1-1").textContent = portfolio.RoleA;
-    document.querySelector("#portfolio-desc1-1").textContent = portfolio.DescriptionA;
-    document.querySelector("#portfolio-skill1-1").textContent = portfolio.SkillA;
-    document.querySelector("#portfolio-wid1-1").textContent = portfolio.WhatIDidA;
-    document.querySelector("#portfolio-wil1-1").textContent = portfolio.WhatILearnA;
-    document.querySelector("#portfolio-chin1-1").textContent = portfolio.ChallengeA;
-    document.querySelector("#portfolio-nexts1-1").textContent = portfolio.NextStepA;
-    document.querySelector("#portfolio-evid1-1").textContent = portfolio.EvidenceA;
-
-    // แสดงเนื้อหา พอร์ตไอเทม 2
-    document.querySelector("#portfolio-title1-2").textContent = portfolio.TitleB;
-    document.querySelector("#portfolio-type1-2").textContent = portfolio.TypeB;
-    document.querySelector("#portfolio-date1-2").textContent = portfolio.DateB;
-    document.querySelector("#portfolio-role1-2").textContent = portfolio.RoleB;
-    document.querySelector("#portfolio-desc1-2").textContent = portfolio.DescriptionB;
-    document.querySelector("#portfolio-skill1-2").textContent = portfolio.SkillB;
-    document.querySelector("#portfolio-wid1-2").textContent = portfolio.WhatIDidB;
-    document.querySelector("#portfolio-wil1-2").textContent = portfolio.WhatILearnB;
-    document.querySelector("#portfolio-chin1-2").textContent = portfolio.ChallengeB;
-    document.querySelector("#portfolio-nexts1-2").textContent = portfolio.NextStepB;
-    document.querySelector("#portfolio-evid1-2").textContent = portfolio.EvidenceB;
-});
-
-const savedPortfolio = localStorage.getItem("portfolio1");
-if (savedPortfolio) {
-    const p = JSON.parse(savedPortfolio);
-
-    document.querySelector("#portfolio-name1").textContent = p.DisplayName;
-    document.querySelector("#portfolio-enjoy1").textContent = p.WhatIEnjoy;
-    document.querySelector("#portfolio-tried1").textContent = p.WhatIveTried;
-    document.querySelector("#portfolio-curious1").textContent = p.WhatImCuriousAbout;
-
-    document.querySelector("#portfolio-title1-1").textContent = p.TitleA;
-    document.querySelector("#portfolio-type1-1").textContent = p.TypeA;
-    document.querySelector("#portfolio-date1-1").textContent = p.DateA;
-    document.querySelector("#portfolio-role1-1").textContent = p.RoleA;
-    document.querySelector("#portfolio-desc1-1").textContent = p.DescriptionA;
-    document.querySelector("#portfolio-skill1-1").textContent = p.SkillA;
-    document.querySelector("#portfolio-wid1-1").textContent = p.WhatIDidA;
-    document.querySelector("#portfolio-wil1-1").textContent = p.WhatILearnA;
-    document.querySelector("#portfolio-chin1-1").textContent = p.ChallengeA;
-    document.querySelector("#portfolio-nexts1-1").textContent = p.NextStepA;
-    document.querySelector("#portfolio-evid1-1").textContent = p.EvidenceA;
-
-    document.querySelector("#portfolio-title1-2").textContent = p.TitleB;
-    document.querySelector("#portfolio-type1-2").textContent = p.TypeB;
-    document.querySelector("#portfolio-date1-2").textContent = p.DateB;
-    document.querySelector("#portfolio-role1-2").textContent = p.RoleB;
-    document.querySelector("#portfolio-desc1-2").textContent = p.DescriptionB;
-    document.querySelector("#portfolio-skill1-2").textContent = p.SkillB;
-    document.querySelector("#portfolio-wid1-2").textContent = p.WhatIDidB;
-    document.querySelector("#portfolio-wil1-2").textContent = p.WhatILearnB;
-    document.querySelector("#portfolio-chin1-2").textContent = p.ChallengeB;
-    document.querySelector("#portfolio-nexts1-2").textContent = p.NextStepB;
-    document.querySelector("#portfolio-evid1-2").textContent = p.EvidenceB;
+function makeId() {
+    return (globalThis.crypto && typeof crypto.randomUUID === "function")
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
-//************************** ส่วนของพอร์ตที่ 2 ************************** {ห้ามประกาศตัวแปรและใช้ไอดรซ้ำกัน เด็ดขาด!!!!}*//
-const form2 = document.querySelector("#profile-form2");
-form2.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const name = document.querySelector("#displayName2").value.trim();
-    const error = document.querySelector("#profile-error2");
-    //====เช็คว่าฟอร์มที่กรอกชื่อ ไม่ว่างเปล่า หากว่างเปล่าจะแจ้งเตือน====
-    if (name === "") {
-        error.textContent = "Please enter your name.";
-        return;
+function loadPortfolios() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        const parsed = saved ? JSON.parse(saved) : [];
+        if (!Array.isArray(parsed)) return [];
+        return parsed.map((portfolio) => ({
+            id: String(portfolio.id || makeId()),
+            displayName: String(portfolio.displayName || ""),
+            whatIEnjoy: String(portfolio.whatIEnjoy || ""),
+            whatIveTried: String(portfolio.whatIveTried || ""),
+            whatImCuriousAbout: String(portfolio.whatImCuriousAbout || ""),
+            items: Array.isArray(portfolio.items) ? portfolio.items.map(normalizeItem) : []
+        }));
+    } catch (error) {
+        console.error("Could not read saved portfolios:", error);
+        return [];
     }
-    error.textContent = "";
-
-    //========อ่านค่าอินพุต========
-    //ข้อมูลผู้ใช้
-    const enjoy1 = document.querySelector("#enjoy2").value.trim();
-    const tried1 = document.querySelector("#tried2").value.trim();
-    const curious1 = document.querySelector("#curious2").value.trim();
-    
-    //พอร์ตไอเทมที่1
-    const title1_1 = document.querySelector("#title2-1").value.trim();
-    const type1_1 = document.querySelector("#type2-1").value.trim();
-    const date1_1 = document.querySelector("#date2-1").value.trim();
-    const role1_1 = document.querySelector("#role2-1").value.trim();
-    const desc1_1 = document.querySelector("#desc2-1").value.trim();
-    const skill1_1 = document.querySelector("#skill2-1").value.trim();
-    const wid1_1 = document.querySelector("#wid2-1").value.trim();
-    const wil1_1 = document.querySelector("#wil2-1").value.trim();
-    const chln1_1 = document.querySelector("#chin2-1").value.trim();
-    const nexts1_1 = document.querySelector("#nexts2-1").value.trim();
-    const evid1_1 = document.querySelector("#evid2-1").value.trim();
-    
-    //พอร์ตไอเทมที่2
-    const title1_2 = document.querySelector("#title2-2").value.trim();
-    const type1_2 = document.querySelector("#type2-2").value.trim();
-    const date1_2 = document.querySelector("#date2-2").value.trim();
-    const role1_2 = document.querySelector("#role2-2").value.trim();
-    const desc1_2 = document.querySelector("#desc2-2").value.trim();
-    const skill1_2 = document.querySelector("#skill2-2").value.trim();
-    const wid1_2 = document.querySelector("#wid2-2").value.trim();
-    const wil1_2 = document.querySelector("#wil2-2").value.trim();
-    const chln1_2 = document.querySelector("#chin2-2").value.trim();
-    const nexts1_2 = document.querySelector("#nexts2-2").value.trim();
-    const evid1_2 = document.querySelector("#evid2-2").value.trim();
-
-    //========สร้าง JavaScript Object========
-    const portfolio = {
-        DisplayName: name,
-        WhatIEnjoy: enjoy1,
-        WhatIveTried: tried1,
-        WhatImCuriousAbout: curious1,
-        
-        TitleA: title1_1,
-        TypeA: type1_1,
-        DateA: date1_1,
-        RoleA: role1_1,
-        DescriptionA: desc1_1,
-        SkillA: skill1_1,
-        WhatIDidA: wid1_1,
-        WhatILearnA: wil1_1,
-        ChallengeA: chln1_1,
-        NextStepA: nexts1_1,
-        EvidenceA: evid1_1,
-        
-        TitleB: title1_2,
-        TypeB: type1_2,
-        DateB: date1_2,
-        RoleB: role1_2,
-        DescriptionB: desc1_2,
-        SkillB: skill1_2,
-        WhatIDidB: wid1_2,
-        WhatILearnB: wil1_2,
-        ChallengeB: chln1_2,
-        NextStepB: nexts1_2,
-        EvidenceB: evid1_2,
-    };
-    localStorage.setItem("portfolio2", JSON.stringify(portfolio));
-    //========อัปเดตผลลัพธ์หน้าเว็บ ด้วย Object========
-    // แสดงเนื้อหาข้อมูลผู้ใช้
-    document.querySelector("#portfolio-enjoy2").textContent = portfolio.WhatIEnjoy;
-    document.querySelector("#portfolio-tried2").textContent = portfolio.WhatIveTried;
-    document.querySelector("#portfolio-curious2").textContent = portfolio.WhatImCuriousAbout;
-    document.querySelector("#portfolio-name2").textContent = portfolio.DisplayName;
-
-    // แสดงเนื้อหา พอร์ตไอเทม 1
-    document.querySelector("#portfolio-title2-1").textContent = portfolio.TitleA;
-    document.querySelector("#portfolio-type2-1").textContent = portfolio.TypeA;
-    document.querySelector("#portfolio-date2-1").textContent = portfolio.DateA;
-    document.querySelector("#portfolio-role2-1").textContent = portfolio.RoleA;
-    document.querySelector("#portfolio-desc2-1").textContent = portfolio.DescriptionA;
-    document.querySelector("#portfolio-skill2-1").textContent = portfolio.SkillA;
-    document.querySelector("#portfolio-wid2-1").textContent = portfolio.WhatIDidA;
-    document.querySelector("#portfolio-wil2-1").textContent = portfolio.WhatILearnA;
-    document.querySelector("#portfolio-chin2-1").textContent = portfolio.ChallengeA;
-    document.querySelector("#portfolio-nexts2-1").textContent = portfolio.NextStepA;
-    document.querySelector("#portfolio-evid2-1").textContent = portfolio.EvidenceA;
-
-    // แสดงเนื้อหา พอร์ตไอเทม 2
-    document.querySelector("#portfolio-title2-2").textContent = portfolio.TitleB;
-    document.querySelector("#portfolio-type2-2").textContent = portfolio.TypeB;
-    document.querySelector("#portfolio-date2-2").textContent = portfolio.DateB;
-    document.querySelector("#portfolio-role2-2").textContent = portfolio.RoleB;
-    document.querySelector("#portfolio-desc2-2").textContent = portfolio.DescriptionB;
-    document.querySelector("#portfolio-skill2-2").textContent = portfolio.SkillB;
-    document.querySelector("#portfolio-wid2-2").textContent = portfolio.WhatIDidB;
-    document.querySelector("#portfolio-wil2-2").textContent = portfolio.WhatILearnB;
-    document.querySelector("#portfolio-chin2-2").textContent = portfolio.ChallengeB;
-    document.querySelector("#portfolio-nexts2-2").textContent = portfolio.NextStepB;
-    document.querySelector("#portfolio-evid2-2").textContent = portfolio.EvidenceB;
-});
-
-const savedPortfolio2 = localStorage.getItem("portfolio2");
-if (savedPortfolio2) {
-    const p = JSON.parse(savedPortfolio2);
-
-    document.querySelector("#portfolio-name2").textContent = p.DisplayName;
-    document.querySelector("#portfolio-enjoy2").textContent = p.WhatIEnjoy;
-    document.querySelector("#portfolio-tried2").textContent = p.WhatIveTried;
-    document.querySelector("#portfolio-curious2").textContent = p.WhatImCuriousAbout;
-
-    document.querySelector("#portfolio-title2-1").textContent = p.TitleA;
-    document.querySelector("#portfolio-type2-1").textContent = p.TypeA;
-    document.querySelector("#portfolio-date2-1").textContent = p.DateA;
-    document.querySelector("#portfolio-role2-1").textContent = p.RoleA;
-    document.querySelector("#portfolio-desc2-1").textContent = p.DescriptionA;
-    document.querySelector("#portfolio-skill2-1").textContent = p.SkillA;
-    document.querySelector("#portfolio-wid2-1").textContent = p.WhatIDidA;
-    document.querySelector("#portfolio-wil2-1").textContent = p.WhatILearnA;
-    document.querySelector("#portfolio-chin2-1").textContent = p.ChallengeA;
-    document.querySelector("#portfolio-nexts2-1").textContent = p.NextStepA;
-    document.querySelector("#portfolio-evid2-1").textContent = p.EvidenceA;
-
-    document.querySelector("#portfolio-title2-2").textContent = p.TitleB;
-    document.querySelector("#portfolio-type2-2").textContent = p.TypeB;
-    document.querySelector("#portfolio-date2-2").textContent = p.DateB;
-    document.querySelector("#portfolio-role2-2").textContent = p.RoleB;
-    document.querySelector("#portfolio-desc2-2").textContent = p.DescriptionB;
-    document.querySelector("#portfolio-skill2-2").textContent = p.SkillB;
-    document.querySelector("#portfolio-wid2-2").textContent = p.WhatIDidB;
-    document.querySelector("#portfolio-wil2-2").textContent = p.WhatILearnB;
-    document.querySelector("#portfolio-chin2-2").textContent = p.ChallengeB;
-    document.querySelector("#portfolio-nexts2-2").textContent = p.NextStepB;
-    document.querySelector("#portfolio-evid2-2").textContent = p.EvidenceB;
 }
 
-// แจ้งเตือนเมื่อ Display name เป็นช่องว่างล้วน
-document.querySelector("#displayName1").addEventListener("input", function () {
-    this.setCustomValidity(this.value.trim() === "" ? "Please enter your name." : "");
+function normalizeItem(item) {
+    return {
+        id: String(item.id || makeId()),
+        title: String(item.title || ""),
+        type: String(item.type || ""),
+        date: String(item.date || ""),
+        role: String(item.role || ""),
+        description: String(item.description || ""),
+        skills: Array.isArray(item.skills) ? item.skills.map(String) : [],
+        whatIDid: String(item.whatIDid || ""),
+        whatILearned: String(item.whatILearned || ""),
+        challenge: String(item.challenge || ""),
+        nextStep: String(item.nextStep || ""),
+        evidence: Array.isArray(item.evidence) ? item.evidence.map(String) : []
+    };
+}
+
+function savePortfolios() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(portfolios));
+        return true;
+    } catch (error) {
+        console.error("Could not save portfolios:", error);
+        alert("Unable to save. Your browser storage may be full or disabled.");
+        return false;
+    }
+}
+
+function selectedPortfolio() {
+    return portfolios.find((portfolio) => portfolio.id === selectedId) || null;
+}
+
+function setText(selector, value) {
+    $(selector).textContent = value || "—";
+}
+
+function makeElement(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+    return element;
+}
+
+function showPortfolioList() {
+    const list = $("#portfolio-list");
+    list.replaceChildren();
+    $("#portfolio-count").textContent = `${portfolios.length}`;
+
+    $("#list-empty").hidden = portfolios.length > 0;
+
+    portfolios.forEach((portfolio) => {
+        const button = makeElement("button", "btn btn-light portfolio-btn text-start");
+        if (portfolio.id === selectedId) button.classList.add("active");
+
+        const name = makeElement("span", "portfolio-btn-name", portfolio.displayName);
+        const count = makeElement("span", "portfolio-btn-count", `${portfolio.items.length} items`);
+        button.append(name, count);
+        button.type = "button";
+        button.addEventListener("click", () => {
+            selectedId = portfolio.id;
+            cancelPortfolioEdit();
+            cancelItemEdit();
+            render();
+        });
+        list.appendChild(button);
+    });
+}
+
+function addDetail(parent, label, value) {
+    const row = makeElement("div", "detail-row");
+    row.appendChild(makeElement("h4", "detail-label", label));
+    row.appendChild(makeElement("p", "detail-value", value || "Not provided"));
+    parent.appendChild(row);
+}
+
+function addEvidence(parent, url) {
+    const row = makeElement("div", "detail-row");
+    row.appendChild(makeElement("h4", "detail-label", "Evidence"));
+    const value = makeElement("div", "detail-value");
+    if (url) {
+        try {
+            const parsed = new URL(url);
+            if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+                const link = makeElement("a", "evidence-link", url);
+                link.href = parsed.href;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                value.appendChild(link);
+            } else {
+                value.textContent = "Invalid evidence URL";
+            }
+        } catch {
+            value.textContent = "Invalid evidence URL";
+        }
+    } else {
+        value.textContent = "Not provided";
+    }
+    row.appendChild(value);
+    parent.appendChild(row);
+}
+
+function createItemCard(item, index) {
+    const card = makeElement("article", "item-card");
+    const heading = makeElement("h3", "item-title", item.title || "Untitled");
+    const summary = makeElement("div", "item-summary");
+    summary.append(
+        makeElement("span", "item-meta", item.type || "No type"),
+        makeElement("span", "item-meta", item.date || "No date")
+    );
+
+    const toggle = makeElement("button", "item-toggle");
+    toggle.type = "button";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.append(heading, summary, makeElement("span", "toggle-indicator", "＋"));
+    toggle.setAttribute("aria-label", `Show details for ${item.title || "item"}`);
+
+    const details = makeElement("div", "item-details");
+    details.hidden = true;
+
+    addDetail(details, "Role", item.role);
+    addDetail(details, "Description", item.description);
+    addDetail(details, "Skills", item.skills.length ? item.skills.join(", ") : "");
+    addDetail(details, "What I did", item.whatIDid);
+    addDetail(details, "What I learned", item.whatILearned);
+    addDetail(details, "Challenge", item.challenge);
+    addDetail(details, "Next step", item.nextStep);
+    addEvidence(details, item.evidence[0] || "");
+
+    const actions = makeElement("div", "item-actions");
+    const edit = makeElement("button", "btn btn-sm btn-outline-secondary", "Edit item");
+    edit.type = "button";
+    edit.addEventListener("click", () => beginItemEdit(item.id));
+    const remove = makeElement("button", "btn btn-sm btn-outline-danger", "Delete item");
+    remove.type = "button";
+    remove.addEventListener("click", () => deleteItem(item.id));
+    actions.append(edit, remove);
+    details.appendChild(actions);
+
+    toggle.addEventListener("click", () => {
+        const isOpen = !details.hidden;
+        details.hidden = isOpen;
+        toggle.setAttribute("aria-expanded", String(!isOpen));
+        toggle.querySelector(".toggle-indicator").textContent = isOpen ? "＋" : "−";
+        card.classList.toggle("is-expanded", !isOpen);
+    });
+
+    card.append(toggle, details);
+    return card;
+}
+
+function showSelectedPortfolio() {
+    const portfolio = selectedPortfolio();
+    $("#portfolio-placeholder").hidden = Boolean(portfolio);
+    $("#selected-portfolio").hidden = !portfolio;
+
+    if (!portfolio) {
+        $("#item-fieldset").disabled = true;
+        $("#item-form-hint").textContent = "Choose or create a Portfolio first to add a project.";
+        return;
+    }
+
+    setText("#portfolio-name", portfolio.displayName);
+    setText("#portfolio-enjoy", portfolio.whatIEnjoy);
+    setText("#portfolio-tried", portfolio.whatIveTried);
+    setText("#portfolio-curious", portfolio.whatImCuriousAbout);
+
+    const list = $("#item-list");
+    list.replaceChildren();
+    portfolio.items.forEach((item, index) => list.appendChild(createItemCard(item, index)));
+    $("#item-count").textContent = `${portfolio.items.length} ${portfolio.items.length === 1 ? "item" : "items"}`;
+    $("#item-empty").hidden = portfolio.items.length > 0;
+
+    $("#item-fieldset").disabled = false;
+    $("#item-form-hint").textContent = `Adding a project to: ${portfolio.displayName}`;
+}
+
+function render() {
+    showPortfolioList();
+    showSelectedPortfolio();
+}
+
+// ---------- Portfolio create / edit / delete ----------
+
+function portfolioFormData() {
+    return {
+        displayName: $("#displayName").value.trim(),
+        whatIEnjoy: $("#enjoy").value.trim(),
+        whatIveTried: $("#tried").value.trim(),
+        whatImCuriousAbout: $("#curious").value.trim()
+    };
+}
+
+function resetPortfolioForm() {
+    $("#portfolio-form").reset();
+    editingPortfolioId = null;
+    $("#portfolio-form-heading").textContent = "Create a Portfolio";
+    $("#portfolio-submit").textContent = "Create Portfolio";
+    $("#portfolio-cancel").hidden = true;
+    $("#portfolio-error").textContent = "";
+}
+
+function cancelPortfolioEdit() {
+    resetPortfolioForm();
+}
+
+$("#portfolio-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = portfolioFormData();
+    if (!data.displayName) {
+        $("#portfolio-error").textContent = "Please enter a display name.";
+        return;
+    }
+
+    if (editingPortfolioId) {
+        const portfolio = portfolios.find((p) => p.id === editingPortfolioId);
+        if (!portfolio) return;
+        Object.assign(portfolio, data);
+        selectedId = portfolio.id;
+    } else {
+        const portfolio = { id: makeId(), ...data, items: [] };
+        portfolios.push(portfolio);
+        selectedId = portfolio.id;
+    }
+
+    if (savePortfolios()) {
+        resetPortfolioForm();
+        render();
+    }
 });
-document.querySelector("#displayName2").addEventListener("input", function () {
-    this.setCustomValidity(this.value.trim() === "" ? "Please enter your name." : "");
+
+$("#portfolio-cancel").addEventListener("click", resetPortfolioForm);
+
+$("#edit-portfolio").addEventListener("click", () => {
+    const portfolio = selectedPortfolio();
+    if (!portfolio) return;
+    editingPortfolioId = portfolio.id;
+    $("#displayName").value = portfolio.displayName;
+    $("#enjoy").value = portfolio.whatIEnjoy;
+    $("#tried").value = portfolio.whatIveTried;
+    $("#curious").value = portfolio.whatImCuriousAbout;
+    $("#portfolio-form-heading").textContent = "Edit Portfolio";
+    $("#portfolio-submit").textContent = "Save Changes";
+    $("#portfolio-cancel").hidden = false;
+    $("#portfolio-error").textContent = "";
+    $("#displayName").focus();
 });
+
+$("#delete-portfolio").addEventListener("click", () => {
+    const portfolio = selectedPortfolio();
+    if (!portfolio) return;
+    const itemCount = portfolio.items.length;
+    const message = itemCount
+        ? `Delete "${portfolio.displayName}" and all ${itemCount} item(s) inside it? This cannot be undone.`
+        : `Delete "${portfolio.displayName}"? This cannot be undone.`;
+    if (!confirm(message)) return;
+
+    portfolios = portfolios.filter((p) => p.id !== portfolio.id);
+    selectedId = portfolios[0]?.id ?? null;
+    resetPortfolioForm();
+    cancelItemEdit();
+    savePortfolios();
+    render();
+});
+
+// ---------- Portfolio Item create / edit / delete ----------
+
+function itemFormData() {
+    const form = new FormData($("#item-form"));
+    return {
+        title: String(form.get("title") || "").trim(),
+        type: String(form.get("type") || "").trim(),
+        date: String(form.get("date") || ""),
+        role: String(form.get("role") || "").trim(),
+        description: String(form.get("description") || "").trim(),
+        skills: String(form.get("skills") || "").split(",").map((skill) => skill.trim()).filter(Boolean),
+        whatIDid: String(form.get("whatIDid") || "").trim(),
+        whatILearned: String(form.get("whatILearned") || "").trim(),
+        challenge: String(form.get("challenge") || "").trim(),
+        nextStep: String(form.get("nextStep") || "").trim(),
+        evidence: String(form.get("evidence") || "").trim() ? [String(form.get("evidence")).trim()] : []
+    };
+}
+
+function fillItemForm(item) {
+    $("#title").value = item.title;
+    $("#type").value = item.type;
+    $("#date").value = item.date;
+    $("#role").value = item.role;
+    $("#skills").value = item.skills.join(", ");
+    $("#description").value = item.description;
+    $("#whatIDid").value = item.whatIDid;
+    $("#whatILearned").value = item.whatILearned;
+    $("#challenge").value = item.challenge;
+    $("#nextStep").value = item.nextStep;
+    $("#evidence").value = item.evidence[0] || "";
+}
+
+function resetItemForm() {
+    $("#item-form").reset();
+    editingItemId = null;
+    $("#item-form-heading").textContent = "Add a Portfolio Item";
+    $("#item-submit").textContent = "Add Item";
+    $("#item-cancel").hidden = true;
+    $("#item-error").textContent = "";
+}
+
+function cancelItemEdit() {
+    resetItemForm();
+}
+
+function beginItemEdit(itemId) {
+    const portfolio = selectedPortfolio();
+    const item = portfolio?.items.find((entry) => entry.id === itemId);
+    if (!item) return;
+    editingItemId = item.id;
+    fillItemForm(item);
+    $("#item-form-heading").textContent = "Edit a Portfolio Item";
+    $("#item-submit").textContent = "Save Changes";
+    $("#item-cancel").hidden = false;
+    $("#item-error").textContent = "";
+    $("#item-form-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("#title").focus({ preventScroll: true });
+}
+
+$("#item-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const portfolio = selectedPortfolio();
+    if (!portfolio) {
+        $("#item-error").textContent = "Choose a Portfolio first.";
+        return;
+    }
+
+    const data = itemFormData();
+    if (!data.title) {
+        $("#item-error").textContent = "Please enter a title.";
+        return;
+    }
+
+    if (data.evidence.length) {
+        try {
+            const url = new URL(data.evidence[0]);
+            if (!["http:", "https:"].includes(url.protocol)) throw new Error();
+        } catch {
+            $("#item-error").textContent = "Please enter a valid http:// or https:// evidence link.";
+            return;
+        }
+    }
+
+    if (editingItemId) {
+        const item = portfolio.items.find((entry) => entry.id === editingItemId);
+        if (!item) return;
+        Object.assign(item, data);
+    } else {
+        portfolio.items.push({ id: makeId(), ...data });
+    }
+
+    if (savePortfolios()) {
+        resetItemForm();
+        render();
+    }
+});
+
+$("#item-cancel").addEventListener("click", resetItemForm);
+
+function deleteItem(itemId) {
+    const portfolio = selectedPortfolio();
+    const item = portfolio?.items.find((entry) => entry.id === itemId);
+    if (!portfolio || !item) return;
+    if (!confirm(`Delete "${item.title}"? This cannot be undone.`)) return;
+    portfolio.items = portfolio.items.filter((entry) => entry.id !== itemId);
+    if (editingItemId === itemId) resetItemForm();
+    savePortfolios();
+    render();
+}
+
+// Initial page load
+render();
