@@ -30,6 +30,11 @@
 
                 <div class="form-panel rounded-4 p-4">
                     <h2 class="h5 fw-bold" id="portfolio-form-heading">Create a Portfolio</h2>
+
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-secondary" id="import-portfolio" type="button">Import Portfolio</button>
+                    </div>
+
                     <form id="portfolio-form">
                         <label class="form-label" for="displayName">Display name *</label>
                         <input class="form-control mb-2" id="displayName" name="displayName" maxlength="80" required>
@@ -63,6 +68,7 @@
                                 <h2 class="h4 fw-bold mb-0" id="portfolio-name"></h2>
                             </div>
                             <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-secondary" id="export-portfolio" type="button">Export Portfolio</button>
                                 <button class="btn btn-sm btn-outline-secondary" id="edit-portfolio" type="button">Edit Portfolio</button>
                                 <button class="btn btn-sm btn-outline-danger" id="delete-portfolio" type="button">Delete</button>
                             </div>
