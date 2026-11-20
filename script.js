@@ -48,8 +48,13 @@ function normalizeItem(item) {
         whatILearned: String(item.whatILearned || ""),
         challenge: String(item.challenge || ""),
         nextStep: String(item.nextStep || ""),
-        evidence: Array.isArray(item.evidence) ? item.evidence.map(String) : []
+        evidence: Array.isArray(item.evidence) ? item.evidence.map(String) : [],
+        challengeId: String(item.challengeId || ""),
+        hostGroup: String(item.hostGroup || ""),
+        category: String(item.category || ""),
+        schemaVersion: String(item.schemaVersion || "")
     };
+    
 }
 
 function savePortfolios() {
