@@ -75,9 +75,17 @@ textarea.form-control {
     white-space: nowrap;
 }
 
+:root {
+    --portfolio-selected-bg: #0b852983;
+}
+
+#import-portfolio {
+    --bs-btn-hover-bg: var(--portfolio-selected-bg);
+}
+
 .portfolio-btn.active {
     color: #fff;
-    background: #0b852983;
+    background: var(--portfolio-selected-bg);
     border-color: #011914;
 }
 
