@@ -5,7 +5,7 @@ body {
 }
 .hero {
     background: #e6efeb;
-    color: #26323a;
+    color: #172c2a;
 }
 .hero p { color: #536662; }
 .tracking { letter-spacing: .13em; }
@@ -15,8 +15,8 @@ body {
 .form-label { font-size: .9rem; font-weight: 600; }
 .form-control { border-radius: .65rem; padding: .68rem .8rem; }
 .form-error { color: #ffbec3; min-height: 1.3em; }
-.btn-success { background: #2bb67e84; border-color: #3e514d; }
-.btn-success:hover { background: #2bb67e84; border-color: #3e514d; }
+.btn-success { background: #2bb67e84; border-color: #177966; }
+.btn-success:hover { background: #2bb67e84; border-color: #116351; }
 .portfolio-btn.active { background: #177966; color: #fff; }
 .item-card { background: #f6f7f9; }
 
@@ -26,5 +26,5 @@ body {
     overflow-y: auto;
 }
 #record-editor::backdrop {
-    background: #0511945e;
+    background: rgba(0, 0, 0, .55);
 }
