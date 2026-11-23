@@ -340,32 +340,35 @@
         saving = true;
         q("#import-save").disabled = true;
         try {
-            // Persist through the PHP API. The server performs the authoritative
-            // duplicate-ID check while holding the storage lock.
-            const formData = new FormData();
-            formData.append("portfolioId", portfolio.id);
-            formData.append("id", pendingItem.id);
-            formData.append("title", pendingItem.title);
-            formData.append("type", pendingItem.type);
-            formData.append("date", pendingItem.date);
-            formData.append("role", pendingItem.role);
-            formData.append("description", pendingItem.description);
-            formData.append("skills", JSON.stringify(pendingItem.skills));
-            formData.append("whatIDid", reflection.whatIDid);
-            formData.append("whatILearned", reflection.whatILearned);
-            formData.append("challenge", reflection.challenge);
-            formData.append("nextStep", reflection.nextStep);
-            formData.append("evidence", JSON.stringify(pendingItem.evidence));
+            // M13-compatible import endpoint: sends JSON + persistent fingerprint.
+            const sourceObject = {
+                id: pendingItem.id,
+                title: pendingItem.title,
+                type: pendingItem.type,
+                date: pendingItem.date,
+                role: pendingItem.role,
+                description: pendingItem.description,
+                skills: pendingItem.skills,
+                reflection,
+                evidence: pendingItem.evidence
+            };
             for (const key of ["challengeId", "hostGroup", "category", "schemaVersion"]) {
-                if (pendingItem[key]) formData.append(key, pendingItem[key]);
+                if (pendingItem[key]) sourceObject[key] = pendingItem[key];
             }
-
-            const response = await fetch("api/items.php", { method: "POST", body: formData });
+            const rawJson = q("#import-text").value;
+            const response = await fetch("api/import.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    portfolioId: portfolio.id,
+                    data: sourceObject,
+                    fileHash: await fingerprint(rawJson),
+                    reflection
+                })
+            });
             const result = await response.json().catch(() => ({}));
             if (!response.ok) {
-                if (response.status === 409) {
-                    throw new Error(result.error || "This item already exists. Duplicate imports are not allowed.");
-                }
+                if (response.status === 409) throw new Error(result.error || "Duplicate import blocked.");
                 throw new Error(result.error || `Server could not save the item (HTTP ${response.status}).`);
             }
 
@@ -381,6 +384,16 @@
             saving = false;
             q("#import-save").disabled = false;
         }
+    }
+
+    async function fingerprint(value) {
+        if (window.crypto && crypto.subtle) {
+            const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+            return Array.from(new Uint8Array(digest)).map(byte => byte.toString(16).padStart(2, "0")).join("");
+        }
+        let hash = 2166136261;
+        for (let i = 0; i < value.length; i++) hash = Math.imul(hash ^ value.charCodeAt(i), 16777619);
+        return "fnv-" + (hash >>> 0).toString(16);
     }
 
     // --- Optional: เลือกไฟล์ .json แล้วใส่ลง textarea
