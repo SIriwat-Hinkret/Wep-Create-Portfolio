@@ -21,10 +21,10 @@
                     description: item.description,
                     skills: item.skills,
                     reflection: {
-                        whatIDid: item.whatIDid,
-                        whatILearned: item.whatILearned,
-                        challenge: item.challenge,
-                        nextStep: item.nextStep
+                        whatIDid: item.reflection?.whatIDid ?? item.whatIDid ?? "",
+                        whatILearned: item.reflection?.whatILearned ?? item.whatILearned ?? "",
+                        challenge: item.reflection?.challenge ?? item.challenge ?? "",
+                        nextStep: item.reflection?.nextStep ?? item.nextStep ?? ""
                     },
                     evidence: item.evidence
                 };
@@ -81,7 +81,10 @@
    
     function openExport() {
         
-        const portfolio = typeof selectedPortfolio === "function" ? selectedPortfolio() : null;
+        // app.js owns the server-loaded portfolios and selectedId.
+        const portfolio = Array.isArray(portfolios)
+            ? portfolios.find((entry) => entry.id === selectedId) || null
+            : null;
         if (!portfolio) {
             alert("Please select a Portfolio first.");
             return;

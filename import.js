@@ -317,7 +317,6 @@
             return;
         }
 
-        // อ่าน Reflection ที่ผู้ใช้แก้ไข และต้องไม่ว่าง
         const reflection = {
             whatIDid: q("#imp-whatIDid").value.trim(),
             whatILearned: q("#imp-whatILearned").value.trim(),
@@ -330,36 +329,58 @@
             if (!value) errors.push(`Please fill in "${labels[key]}".`);
             else if (value.length > MAX_LONG) errors.push(`"${labels[key]}" is too long (max ${MAX_LONG}).`);
         }
-        // กัน ID ซ้ำอีกครั้งตอน Save (เผื่อกดซ้ำ / เปิดหลายแท็บ)
-        if (findPortfolioWithItem(pendingItem.id)) errors.push("This item was already imported.");
+        if (findPortfolioWithItem(pendingItem.id)) {
+            errors.push(`This item (id "${pendingItem.id}") already exists. Duplicate imports are not allowed.`);
+        }
         if (errors.length) {
             showErrors(errors);
             return;
         }
 
-        const newItem = { ...pendingItem, ...reflection };
-        portfolio.items.push(newItem);
-
         saving = true;
         q("#import-save").disabled = true;
         try {
-            // รองรับทั้งแบบ localStorage (sync) และแบบ Server (async/Promise) 
-            const ok = await Promise.resolve(savePortfolios());
-            if (ok === false) throw new Error("save failed");
+            // Persist through the PHP API. The server performs the authoritative
+            // duplicate-ID check while holding the storage lock.
+            const formData = new FormData();
+            formData.append("portfolioId", portfolio.id);
+            formData.append("id", pendingItem.id);
+            formData.append("title", pendingItem.title);
+            formData.append("type", pendingItem.type);
+            formData.append("date", pendingItem.date);
+            formData.append("role", pendingItem.role);
+            formData.append("description", pendingItem.description);
+            formData.append("skills", JSON.stringify(pendingItem.skills));
+            formData.append("whatIDid", reflection.whatIDid);
+            formData.append("whatILearned", reflection.whatILearned);
+            formData.append("challenge", reflection.challenge);
+            formData.append("nextStep", reflection.nextStep);
+            formData.append("evidence", JSON.stringify(pendingItem.evidence));
+            for (const key of ["challengeId", "hostGroup", "category", "schemaVersion"]) {
+                if (pendingItem[key]) formData.append(key, pendingItem[key]);
+            }
+
+            const response = await fetch("api/items.php", { method: "POST", body: formData });
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) {
+                if (response.status === 409) {
+                    throw new Error(result.error || "This item already exists. Duplicate imports are not allowed.");
+                }
+                throw new Error(result.error || `Server could not save the item (HTTP ${response.status}).`);
+            }
+
+            const importedTitle = pendingItem.title;
+            selectedId = portfolio.id;
+            await loadPortfolios();
+            closeImport();
+            alert(`Imported "${importedTitle}" into "${portfolio.displayName}".`);
         } catch (error) {
             console.error("Import save failed:", error);
-            portfolio.items = portfolio.items.filter((it) => it.id !== newItem.id); // rollback
-            showErrors(["Could not save the imported item. Nothing was changed. Please try again."]);
-            return;
+            showErrors([error.message || "Could not save the imported item. Nothing was changed. Please try again."]);
         } finally {
             saving = false;
             q("#import-save").disabled = false;
         }
-
-        selectedId = portfolio.id;
-        closeImport();
-        render();
-        alert(`Imported "${newItem.title}" into "${portfolio.displayName}".`);
     }
 
     // --- Optional: เลือกไฟล์ .json แล้วใส่ลง textarea
